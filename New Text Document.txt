@@ -1,0 +1,15 @@
+from sklearn.pipeline import Pipeline
+
+full_pipeline = Pipeline([("Scaler", StandardScaler()), 
+                          ("RF", RandomForestClassifier(random_state=42))])
+learned_data = full_pipeline.fit(X_train, y_train)
+learned_data
+
+print("Model Name: 'RandomForestClassifier' ")
+print(f"Model Accuracy Training Score: {learned_data.score(X_train, y_train)}")
+print(f"Model Accuracy Testing Score: {learned_data.score(X_test_scaled, y_test)}")
+
+predicted_data = learned_data.predict(X_test_scaled)
+print(f"Precision Score: {precision_score(y_test, predicted_data)} ")
+print(f"Recall Score: {recall_score(y_test, predicted_data)}")
+print(f"F1 Score: {f1_score(y_test, predicted_data)}")
